@@ -15,17 +15,19 @@ class Page2 extends Component
 
     protected $rules = [
         'inputs.are_you_married' => 'required',
+        'inputs.dom_month' => 'nullable|required',
+        'inputs.dom_day' => 'nullable|required',
+        'inputs.dom_year' => 'nullable|required',
     ];
 
     protected $messages = [
         'inputs.are_you_married.required' => 'This Field is required.',
-        'inputs.last_name.required' => 'The Last Name is required.',
-        'inputs.address.required' => 'The Address is required.',
-        'inputs.city.required' => 'The City is required.',
-        'inputs.country.required' => 'The Country is required.',
-        'inputs.dob_month.required' => 'The Month is required.',
-        'inputs.dob_day.required' => 'The Day is required.',
-        'inputs.dob_year.required' => 'The Year is required.',
+        'inputs.country_of_marriage.required' => 'This Country of Marriage id required.',
+        'inputs.dom_month.required' => 'The Month is required.',
+        'inputs.dom_day.required' => 'The Day is required.',
+        'inputs.dom_year.required' => 'The Year is required.',
+
+        // dom means here date of marriege
     ];
 
 
@@ -33,12 +35,19 @@ class Page2 extends Component
     {
         $this->inputs = [
             'are_you_married' => '',
+            'dom_month' => '',
         ];
     }
 
     public function goToPage1(): void
     {
         $this->dispatch('go-to-page1');
+    }
+
+    public function submit(): void
+    {
+        $this->validate();
+        logger('form is submitted');
     }
 
     public function render()
