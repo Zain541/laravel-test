@@ -8,6 +8,7 @@ use Livewire\Attributes\On;
 class Form extends Component
 {
     public array $page1Inputs = [];
+    public array $page2Inputs = [];
     public bool $showPage1 = true;
     public bool $showPage2 = false;
 
@@ -55,13 +56,18 @@ class Form extends Component
         $this->showPage2 = true;
     }
 
+    #[On('page-2-inputs')] 
+    public function page2Inputs(array $page2Inputs): void
+    {
+        $this->page2Inputs = $page2Inputs;
+    }
+
     
     #[On('go-to-page1')] 
     public function goToPage1(): void
     {
         $this->showPage1 = true;
         $this->showPage2 = false;
-        logger($this->page1Inputs);
     }
     public function render()
     {

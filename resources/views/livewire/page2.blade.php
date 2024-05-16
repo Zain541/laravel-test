@@ -1,7 +1,7 @@
 <div>
     <div class="container w-9/12 m-auto p-12">
         <div class="grid grid-cols-2 gap-2 py-4">
-        <label for="country">Are you Married</label>
+        <label for="are_you_married">Are you Married?</label>
             <select type="text" wire:model.live="inputs.are_you_married" id="are_you_married" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="">Select</option>
                 <option value="yes">Yes</option>                    
@@ -10,6 +10,7 @@
             <div></div>
             @error('inputs.are_you_married') <span class="error text-red-600">{{ $message }}</span> @enderror
         </div>
+
 
         @if($inputs['are_you_married'] === 'yes')
             <div class="grid grid-cols-2 gap-2  py-4">
@@ -60,41 +61,37 @@
 
             <div class="grid grid-cols-2 gap-2  py-4">
             <label for="country_of_marriage">Country of Marriage</label>
-            <input type="text" id="country_of_marriage" wire:model="inputs.country_of_marriage" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Last Name" />
+            <input type="text" id="country_of_marriage" wire:model="inputs.country_of_marriage" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Country of Marriage" />
             <div></div>
             @error('inputs.country_of_marriage') <span class="error text-red-600">{{ $message }}</span> @enderror
         </div>
+        @elseif($inputs['are_you_married'] === 'no')
+            <div class="grid grid-cols-2 gap-2 py-4">
+            <label for="are_you_widowed">Are you widowed?</label>
+                <select type="text" wire:model="inputs.are_you_widowed" id="are_you_widowed" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="">Select</option>
+                    <option value="yes">Yes</option>                    
+                    <option value="no">No</option>                    
+                </select>
+                <div></div>
+                @error('inputs.are_you_widowed') <span class="error text-red-600">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 py-4">
+            <label for="have_you_ever_been_married">Have you ever been married in the past?</label>
+                <select type="text" wire:model="inputs.have_you_ever_been_married" id="have_you_ever_been_married" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="">Select</option>
+                    <option value="yes">Yes</option>                    
+                    <option value="no">No</option>                    
+                </select>
+                <div></div>
+                @error('inputs.have_you_ever_been_married') <span class="error text-red-600">{{ $message }}</span> @enderror
+            </div>
         @endif
 
-
-        <div class="grid grid-cols-2 gap-2  py-4">
-            <label for="last_name">Last name</label>
-            <input type="text" id="last_name" wire:model="inputs.last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Last Name" />
-            <div></div>
-            @error('inputs.last_name') <span class="error text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="grid grid-cols-2 gap-2  py-4">
-            <label for="address">Address</label>
-            <textarea type="text" id="address" wire:model="inputs.address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address"></textarea>
-            <div></div>
-            @error('inputs.address') <span class="error text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="grid grid-cols-2 gap-2  py-4">
-            <label for="city">city</label>
-            <input type="text" id="city" wire:model="inputs.city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="City" />
-            <div></div>
-            @error('inputs.city') <span class="error text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="grid grid-cols-2 gap-2  py-4">
-            <label for="country">country</label>
-            <input type="text" id="country" wire:model="inputs.country" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Country" />
-            <div></div>
-            @error('inputs.country') <span class="error text-red-600">{{ $message }}</span> @enderror
-        </div>
-
+        @if($marriageAgeError === true)
+            <div class="py-12"><span class="error text-red-600">You are not eligible to apply because your marriage occurred before your 18th birthday.</span></div>
+        @endif
 
         <div class="flex justify-between">
             <button class="bg-gray-300 p-2" wire:click="goToPage1">

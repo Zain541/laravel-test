@@ -41,7 +41,7 @@ class Page1 extends Component
         $this->months = $months;
         $this->monthDays = $monthDays;
         $this->inputs = $inputs;
-        if(array_key_exists('age', $inputs) === false)// it means that the user has not submitted the page-1 yet
+        if(array_key_exists('dob', $inputs) === false)// it means that the user has not submitted form in page 1 yet
         {
             $this->inputs = [
                 'dob_month' => '',
@@ -53,9 +53,9 @@ class Page1 extends Component
     public function submitPage1(): void
     {
         $this->validate();
-        $dob = $this->inputs['dob_year'] . '-' . $this->inputs['dob_month'] . '-' . $this->inputs['dob_day'];
-        $age = Carbon::createFromFormat('Y-m-d', $dob)->age;
-        $this->inputs['age'] = $age;
+        $dobUnformatted = $this->inputs['dob_year'] . '-' . $this->inputs['dob_month'] . '-' . $this->inputs['dob_day'];
+        $dob = Carbon::createFromFormat('Y-m-d', $dobUnformatted)->format('Y-m-d');
+        $this->inputs['dob'] = $dob;
         $this->dispatch('page-1-inputs', page1Inputs: $this->inputs);
     }
 
