@@ -4,12 +4,11 @@ namespace App\Livewire;
 
 use Carbon\Carbon;
 use Livewire\Component;
-use SebastianBergmann\Type\VoidType;
 
 class Page2 extends Component
 {
-
     public array $monthDays = [];
+
     public array $months = [];
 
     public array $inputs = [];
@@ -40,7 +39,6 @@ class Page2 extends Component
         // dom means here date of marriege
     ];
 
-
     public function mount(): void
     {
         $this->inputs = [
@@ -58,22 +56,21 @@ class Page2 extends Component
     {
         $this->validate();
         $dob = Carbon::createFromFormat('Y-m-d', $this->dob);
-        $domUnformatted = $this->inputs['dom_year'] . '-' . $this->inputs['dom_month'] . '-' . $this->inputs['dom_day'];
+        if ($this->inputs['are_you_married'] === 'yes') {
+            $domUnformatted = $this->inputs['dom_year'].'-'.$this->inputs['dom_month'].'-'.$this->inputs['dom_day'];
+            $dom = Carbon::createFromFormat('Y-m-d', $domUnformatted);
+            $ageWhenGetMarried = $dob->diffInYears($dom);
+            if ($ageWhenGetMarried < 18) {
+                $this->marriageAgeError = true;
 
-        $dom = Carbon::createFromFormat('Y-m-d', $domUnformatted);
-
-        
-        $ageWhenGetMarried = $dob->diffInYears($dom);
-        
-        if($ageWhenGetMarried < 18)
-        {
-            $this->marriageAgeError = true;
-            return false;
+                return false;
+            }
+            $this->inputs['dom'] = $dom;
+            $this->marriageAgeError = false;
         }
-        $this->inputs['dom'] = $dom;
-        $this->marriageAgeError = false;
-        
+
         $this->dispatch('page-2-inputs', page2Inputs: $this->inputs);
+
         return true;
     }
 

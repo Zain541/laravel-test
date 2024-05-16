@@ -2,17 +2,21 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
-use Livewire\Attributes\On; 
 
 class Form extends Component
 {
     public array $page1Inputs = [];
+
     public array $page2Inputs = [];
-    public bool $showPage1 = true;
-    public bool $showPage2 = false;
+
+    public array $formOutput = [];
+
+    public int $page = 1;
 
     public array $months;
+
     public array $monthDays;
 
     public function mount(): void
@@ -29,7 +33,7 @@ class Form extends Component
             9 => 'September',
             10 => 'October',
             11 => 'November',
-            12 => 'December'
+            12 => 'December',
         ];
 
         $this->monthDays = [
@@ -44,31 +48,36 @@ class Form extends Component
             9 => 30,
             10 => 31,
             11 => 30,
-            12 => 31
+            12 => 31,
         ];
     }
 
-    #[On('page-1-inputs')] 
+    #[On('page-1-inputs')]
     public function page1Inputs(array $page1Inputs): void
     {
         $this->page1Inputs = $page1Inputs;
-        $this->showPage1 = false;
-        $this->showPage2 = true;
+        $this->switchPages(2);
     }
 
-    #[On('page-2-inputs')] 
+    #[On('page-2-inputs')]
     public function page2Inputs(array $page2Inputs): void
     {
         $this->page2Inputs = $page2Inputs;
+        $this->formOutput = array_merge($this->page1Inputs, $this->page2Inputs);
+        $this->switchPages(3);
     }
 
-    
-    #[On('go-to-page1')] 
+    #[On('go-to-page1')]
     public function goToPage1(): void
     {
-        $this->showPage1 = true;
-        $this->showPage2 = false;
+        $this->switchPages(1);
     }
+
+    public function switchPages(int $page): void
+    {
+        $this->page = $page;
+    }
+
     public function render()
     {
         return view('livewire.form');
